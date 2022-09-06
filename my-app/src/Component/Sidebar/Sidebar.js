@@ -1,6 +1,5 @@
 import React from 'react';
 import './Sidebar.css';
-import data from '../../ls-chapter-24293-chapter-data.json'
 
 function Sidebar() {
   return (

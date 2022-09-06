@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './Body.css'
 import Sidebar from '../Sidebar/Sidebar';
-import { Stage, Layer, Star, Text, Transformer } from 'react-konva';
+import { Stage, Layer, Star, Text } from 'react-konva';
 // import { StickyNote } from "./StickyNote";
 
 function generateShapes() {
@@ -23,8 +23,6 @@ const App = () => {
   const [textX, setTextX] = useState(100);
   const [textY, setTextY] = useState(100);
   const [selected, setSelected] = useState(false);
-  const textRef = useRef(null);
-  const transformerRef = useRef(null);
 
   const handleDragStart = (e) => {
     const id = e.target.id();
@@ -65,30 +63,6 @@ const App = () => {
     }
   };
 
-  const handleResize = () => {
-    if (textRef.current !== null) {
-      const textNode = textNode.current;
-      const newWidth = textNode.width() * textNode.scaleX();
-      textNode.setAttrs({
-        width: newWidth,
-        scaleX: 1
-      });
-    }
-  }
-
-  const transformer = selected ? (
-    <Transformer
-      ref={transformerRef}
-      rotateEnabled={false}
-      flipEnabled={false}
-      enabledAnchors={["middle-left", "middle-right"]}
-      boundBoxFunc={(oldBox, newBox) => {
-        newBox.width = Math.max(30, newBox.width);
-        return newBox;
-      }}
-    />
-  ) : null;
-
   return (
     <div>
       <div className='body' onMouseDown={() => setSelected(false)}>
@@ -96,7 +70,6 @@ const App = () => {
         <Stage width={window.innerWidth} height={window.innerHeight}>
           <Layer>
             <Text
-              ref={textRef}
               fontSize={20}
               align={"left"}
               fontStyle={20}
@@ -108,7 +81,6 @@ const App = () => {
               width={width}
               onDblClick={e => handleTextDblClick(e)}
               perfectDrawEnabled={false}
-              onTransform={handleResize}
             />
             {stars.map((star) => (
               <Star
@@ -134,7 +106,6 @@ const App = () => {
                 onDragEnd={handleDragEnd}
               />
             ))}
-            {transformer}
           </Layer>
         </Stage>
       </div>
