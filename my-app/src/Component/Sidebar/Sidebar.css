@@ -1,0 +1,125 @@
+.sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-top: 48px;
+    border-top: 1px solid rgb(213, 213, 213);
+}
+
+.sidebar-title-1 {
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-bottom: 20px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.sidebar-title-2 {
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.sidebar-text-2 {
+    font-weight: 400;
+}
+
+.sidebar-title-3 {
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-top: 10px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+  
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row-text-3 {
+    padding-bottom: 20px;
+}
+
+.title-row-1 {
+    margin-top: 10px;
+    color:rgb(169, 169, 169);
+}
+
+.title-row-2 {
+    color:rgb(169, 169, 169);
+}
+
+.title-row-3 {
+    color:rgb(169, 169, 169);
+}
+
+.title-row-4 {
+    color:rgb(169, 169, 169);
+}
+
+.number-text {
+    padding-left: 5px;
+}
+
+.sidebar-title-4 {
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.row-text-4 {
+    margin-top: 10px;
+    display: flex;
+}
+
+.row-column {
+    margin-left: 10px;
+    display: flex;
+}
+
+.row-text-5 {
+    display: flex;
+}
+
+.sidebar-title-5 {
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-top: 10px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.sidebar-title-6 {
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-top: 10px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.round-color-5 {
+    width:20px;
+    height:20px;
+    background:black;
+    border-radius: 20%;
+}
