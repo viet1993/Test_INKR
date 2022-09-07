@@ -23,7 +23,7 @@ export function ResizableText({
 
   function handleResize() {
     if (textRef.current !== null) {
-      const textNode = textNode.current;
+      const textNode = textRef.current;
       const newWidth = textNode.width() * textNode.scaleX();
       const newHeight = textNode.height() * textNode.scaleY();
       textNode.setAttrs({
@@ -39,7 +39,7 @@ export function ResizableText({
       ref={transformerRef}
       rotateEnabled={false}
       flipEnabled={false}
-      //enabledAnchors={["middle-left", "middle-right"]}
+      enabledAnchors={["middle-left", "middle-right"]}
       boundBoxFunc={(oldBox, newBox) => {
         newBox.width = Math.max(30, newBox.width);
         return newBox;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Body.css'
 import Sidebar from '../Sidebar/Sidebar';
-import { Stage, Layer, Star, Text } from 'react-konva';
-// import { StickyNote } from "./StickyNote";
+import { Stage, Layer, Star } from 'react-konva';
+import { StickyNote } from "./StickyNote";
 
 function generateShapes() {
   return [...Array(10)].map((_, i) => ({
@@ -19,9 +19,10 @@ const INITIAL_STATE = generateShapes();
 const App = () => {
   const [stars, setStars] = React.useState(INITIAL_STATE);
   const [text, setText] = useState("Click to resize. Double click to edit.");
-  const [width] = useState(200);
-  const [textX, setTextX] = useState(100);
-  const [textY, setTextY] = useState(100);
+  const [width, setWidth] = useState(200);
+  const [height, setHeight] = useState(200);
+  const [textX] = useState(100);
+  const [textY] = useState(100);
   const [selected, setSelected] = useState(false);
 
   const handleDragStart = (e) => {
@@ -35,6 +36,7 @@ const App = () => {
       })
     );
   };
+
   const handleDragEnd = (e) => {
     setStars(
       stars.map((star) => {
@@ -46,42 +48,40 @@ const App = () => {
     );
   };
 
-   const handleTextDblClick = e => {
-    const absPos = e.target.getAbsolutePosition();
-    setSelected(true);
-    setTextX(absPos.x);
-    setTextY(absPos.y);
-  };
-
-  const handleTextEdit = e => {
-    setText(e.target.value);
-  };
-
-  const handleTextareaKeyDown = e => {
-    if (e.keyCode === 13) {
-      setSelected(false);    
-    }
-  };
-
   return (
     <div>
-      <div className='body' onMouseDown={() => setSelected(false)}>
-        <Sidebar/>
-        <Stage width={window.innerWidth} height={window.innerHeight}>
+      <div className='body'>
+        <Sidebar selected={selected}/>
+        <Stage
+          width={window.innerWidth}
+          height={window.innerHeight}
+          onClick={(e) => {
+            if (e.currentTarget._id === e.target._id) {
+              setSelected(false);
+            }
+          }}
+        >
           <Layer>
-            <Text
-              fontSize={20}
-              align={"left"}
-              fontStyle={20}
-              draggable
-              text={text}
-              x={textX}
-              y={textY}
-              wrap="word"
-              width={width}
-              onDblClick={e => handleTextDblClick(e)}
-              perfectDrawEnabled={false}
-            />
+          <StickyNote
+            x={textX}
+            y={textY}
+            text={text}
+            // colour="#FFDAE1"
+            onTextChange={(value) => setText(value)}
+            width={width}
+            height={height}
+            selected={selected}
+            onTextResize={(newWidth, newHeight) => {
+              setWidth(newWidth);
+              setHeight(newHeight);
+            }}
+            onClick={() => {
+              setSelected(!selected);
+            }}
+            onTextClick={(newSelected) => {
+              setSelected(newSelected);
+            }}
+          />
             {stars.map((star) => (
               <Star
                 key={star.id}
@@ -109,18 +109,6 @@ const App = () => {
           </Layer>
         </Stage>
       </div>
-
-      <textarea
-        value={text}
-        style={{
-          display: selected ? "block" : "none",
-          position: "absolute",
-          top: textY + "px",
-          left: textX + "px"
-        }}
-        onChange={e => handleTextEdit(e)}
-        onKeyDown={e => handleTextareaKeyDown(e)}
-    />
   </div>
   );
 };

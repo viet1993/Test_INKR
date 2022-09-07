@@ -1,8 +1,9 @@
 import React from 'react';
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({selected = false}) {
   return (
+    selected ?
     <div className="sidebar">
         <div className='sidebar-title-1'> 
             <span>Text 2/859</span>
@@ -99,6 +100,13 @@ function Sidebar() {
                     </div>
                 </div>
             </div>
+        </div>
+    </div> :
+
+     <div className="sidebar">
+        <div className='sidebar-title-1'> 
+            <p>Chapter Name</p>
+            <p className='chapter'>Chapter 1</p>
         </div>
     </div>
   );

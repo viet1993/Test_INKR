@@ -15,6 +15,8 @@ export function StickyNote({
   selected,
   onTextClick
 }) {
+  const [textX, setTextX] = useState(x);
+  const [textY, setTextY] = useState(y);
   const [isEditing, setIsEditing] = useState(false);
   const [isTransforming, setIsTransforming] = useState(false);
 
@@ -26,9 +28,16 @@ export function StickyNote({
     }
   }, [selected, isEditing, isTransforming]);
 
-  function toggleEdit() {
-    setIsEditing(!isEditing);
-    onTextClick(!isEditing);
+  function toggleEdit(e) {
+    if(e.type !== "keydown") {
+      const absPos = e.target.getAbsolutePosition() ? e.target.getAbsolutePosition() : undefined;
+      if(absPos) {
+        setTextX(absPos.x);
+        setTextY(absPos.y);
+      }
+      setIsEditing(!isEditing);
+      onTextClick(!isEditing);
+    }
   }
 
   function toggleTransforming() {
@@ -37,7 +46,7 @@ export function StickyNote({
   }
 
   return (
-    <Group x={x} y={y}>
+    <Group x={textX} y={textY}>
       <Rect
         x={20}
         y={20}
@@ -62,15 +71,13 @@ export function StickyNote({
         onTap={onClick}
       />
       <EditableText
-        x={20}
-        y={40}
         text={text}
         width={width}
         height={height}
         onResize={onTextResize}
         isEditing={isEditing}
         isTransforming={isTransforming}
-        onToggleEdit={toggleEdit}
+        onToggleEdit={(e) => toggleEdit(e)}
         onToggleTransform={toggleTransforming}
         onChange={onTextChange}
       />

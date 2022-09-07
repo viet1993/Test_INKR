@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ResizableText } from "./ResizableText";
 import { EditableTextInput } from "./EditableTextInput";
 
@@ -18,14 +18,9 @@ export function EditableText({
   width,
   height
 }) {
-  const [textX, setTextX] = useState(x);
-  const [textY, setTextY] = useState(y);
   function handleEscapeKeys(e) {
     if ((e.keyCode === RETURN_KEY && !e.shiftKey) || e.keyCode === ESCAPE_KEY) {
-      const absPos = e.target.getAbsolutePosition();
       onToggleEdit(e);
-      setTextX(absPos.x);
-      setTextY(absPos.y);
     }
   }
 
@@ -36,8 +31,8 @@ export function EditableText({
   if (isEditing) {
     return (
       <EditableTextInput
-        x={textX}
-        y={textY}
+        x={x}
+        y={y}
         width={width}
         height={height}
         value={text}

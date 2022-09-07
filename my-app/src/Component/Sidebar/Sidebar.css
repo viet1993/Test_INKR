@@ -123,3 +123,8 @@
     background:black;
     border-radius: 20%;
 }
+
+.chapter {
+    font-weight: 400;
+    padding-top: -10px;
+}

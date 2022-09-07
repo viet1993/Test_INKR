@@ -6,7 +6,7 @@ function getStyle(width, height) {
   const baseStyle = {
     width: `${width}px`,
     height: `${height}px`,
-    border: "none",
+    border: "1px solid gray",
     padding: "0px",
     margin: "0px",
     background: "none",

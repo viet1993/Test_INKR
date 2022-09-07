@@ -14,3 +14,8 @@
 .title {
     color: rgba(0, 0, 0, 0.45);
 }
+
+.name {
+    padding-left: 5px;
+    padding-right: 5px;
+}
